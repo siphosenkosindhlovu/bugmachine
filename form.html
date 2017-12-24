@@ -9,7 +9,14 @@
   <link rel="stylesheet" type="text/css" href="fa/css/font-awesome.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="form.css">
-</script>
+  <script>
+    window.addEventListener('offline', function () {
+      console.log('Offline')
+    })
+    window.addEventListener('online', function () {
+      console.log('Online')
+    })
+  </script>
   <script src="js/jquery.js"></script>
   <script>
     $(document).on('mobileinit', function () {
@@ -18,8 +25,11 @@
   </script>
   <script src="js/jquery.mobile-1.4.5.min.js"></script>
   <script src="jquery.validate.min.js"></script>
-  <script src="bs/js/bootstrap.js"></script>
 
+  <script src="bs/js/bootstrap.js"></script>
+  <script src="js/moment.js"></script>
+  <script src="js/underscore-min.js"></script>
+  <script src="js/validate.min.js"></script>
   <!--[if lte IE 9]>
     <script type="text/javascript" src="js/flashcanvas.js"></script>
   <![endif]-->
@@ -39,7 +49,7 @@
           <a href="#" data-rel="back">
             <i class="fa fa-angle-left fa-lg"></i> Exit</a>
         </span>
-        <img src="Steward Bank Logo.jpg" class="main-logo">
+        <img src="Logo.jpg" class="main-logo">
 
       </div>
       <div class="progress_wrapper">
@@ -79,11 +89,13 @@
             <div class="form-group col-sm-6">
               <input type="text" name="firstName">
               <label for="firstName">First Name</label>
+              <div class="messages"></div>
             </div>
 
             <div class="form-group col-sm-6">
               <input type="text" name="lastName">
               <label for="lastName">Last Name</label>
+              <div class="messages"></div>
             </div>
           </div>
 
@@ -92,11 +104,13 @@
             <div class="form-group col-xs-4">
               <input type="date" name="dob">
               <label for="dob">Date of Birth</label>
+              <div class="messages"></div>
             </div>
 
             <div class="form-group col-xs-8">
               <input type="text" name="idnumber">
               <label for="idnumber">National Identification Number</label>
+              <div class="messages"></div>
             </div>
           </div>
 
@@ -104,6 +118,7 @@
             <div class="form-group col-sm-10">
               <input type="text" name="address">
               <label for="address">Address</label>
+              <div class="messages"></div>
             </div>
           </div>
 
@@ -112,6 +127,7 @@
             <div class="form-group col-xs-6">
               <input type="text" name="city">
               <label for="city">City/Town</label>
+              <div class="messages"></div>
             </div>
 
             <div class="form-group col-xs-6">
@@ -130,6 +146,7 @@
                 </select>
               </div>
               <label for="province">Province</label>
+              <div class="messages"></div>
             </div>
           </div>
 
@@ -138,48 +155,51 @@
             <div class="form-group col-sm-6">
               <input type="tel" name="phone">
               <label for="phone">Mobile Number</label>
+              <div class="messages"></div>
             </div>
 
             <div class="form-group col-sm-6">
               <input type="number" name="cardnum">
               <label for="cardnum">Your Card Number</label>
+              <div class="messages"></div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-sm-4">
-              <input type="file" name="headpicture">
+              <input type="file" name="headpicture" accept=".jpg">
               <label for="headpicture">Headshot Image</label>
+              <div class="messages"></div>
             </div>
 
             <div class="form-group col-sm-4">
-              <input type="file" name="idpicture">
+              <input type="file" name="idpicture" accept=".jpg">
               <label for="idpicture">Copy of National Identity Card</label>
+              <div class="messages"></div>
             </div>
-
             <div class="form-group col-sm-4">
 
-              <input type="file" name="proofpicture">
+              <input type="file" name="proofpicture" accept=".jpg">
               <label for="proofpicture">Copy of Proof of Residence</label>
+              <div class="messages"></div>
             </div>
           </div>
           <div class="row">
-            <div class="form-group col-sm-4">
-              <div name="signature" id="signature"></div>
+            <div class="col-sm-4">
+              <div id="signature"></div>
 
               <div id="tools"></div>
               <label for="signature">Customer Signature(Sign on your screen)</label>
+
             </div>
           </div>
-
           <br>
-          <div class="form-group text-right">
+          <div class="text-right">
             <!--button class="btn btn-default" type="submit">Cancel Application</button-->
-            <button id="initSub" type="button" class="btn apply_now">Continue</button>
+            <button type="submit" class="btn apply_now">Continue</button>
             <a id="move2" style="display:none" href="#stage2" data-transition="slide" class="btn apply_now">Continue</a>
           </div>
         </form>
         <script>
-          $("#signup").validate();
         </script>
       </div>
     </main>
@@ -197,7 +217,7 @@
           <a href="#" data-transition="slide" data-direction="reverse" data-rel="back">
             <i class="fa fa-angle-left fa-lg"></i> Back</a>
         </span>
-        <img src="Steward Bank Logo.jpg" class="main-logo">
+        <img src="Logo.jpg" class="main-logo">
       </div>
       <div class="progress_wrapper">
         <div class="progressbar">
@@ -280,31 +300,26 @@
             <tr>
               <td>Card Number</td>
               <td>
-                <span id="cardnum">8888-8888-8888-8888</span>
+                <span id="cardnum"></span>
               </td>
             </tr>
             <tr>
-              <td>Head Picture</td>
-              <td>
-                <span id="headpicture"></span>
-              </td>
-            </tr>
-            <tr>
-              <td>Copy of I.D</td>
-              <td>
-                <span id="idpicture"></span>
-              </td>
-            </tr>
-            <tr>
-              <td>Proof of Residence</td>
-              <td>
-                <span id="proofpicture"></span>
+              <td colspan="3">
+                <div class="col-sm-4">
+                  <img id="headpicture">
+                </div>
+                <div class="col-sm-4">
+                  <img id="idpicture">
+                </div>
+                <div class="col-sm-4">
+                  <img id="proofpicture">
+                </div>
               </td>
             </tr>
             <tr>
               <td>Signature</td>
               <td>
-                <span id="sigpicture"></span>
+                <img id="sigpicture">
               </td>
             </tr>
           </table>
@@ -332,7 +347,7 @@
           <a href="#" data-transition="slide" data-direction="reverse" data-rel="back">
             <i class="fa fa-angle-left fa-lg"></i> Back</a>
         </span>
-        <img src="Steward Bank Logo.jpg" class="main-logo">
+        <img src="Logo.jpg" class="main-logo">
       </div>
       <div class="progress_wrapper">
         <div class="progressbar">
@@ -426,30 +441,19 @@
               the use of Banking Services on EcoCash, Internet, SMS Alert facility or any other banking delivery channel
               and shall advise the customer of the changes accordingly.</li>
             <li>I/We hereby agree to the Terms and Conditions as published from time to time by EcoCash(r), EcoSure(r) and Steward
-              Health. I/We hereby nominate the following as beneficiary for Ecosure Funeral:
+              Health.
 
-              <form name="signup" data-enhance=false enctype="multipart/form-data">
                 <div class="row">
                   <div class="form-group">
-                    <div class="col-sm-4">
-                      <input type="text" name="benefName" id="benefName">
-                      <label for="benefName">Cover(Full Name)</label>
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="text" name="benefID" id="benefID">
-                      <label for="benefID">I.D. Number</label>
-                    </div>
-                  </div>
-                  <div class="form-group">
                     <label>
-                      <input type="checkbox">I accept these Terms and Conditions</label>
+                      <input data-enhance="false" id="tandc" type="checkbox">I accept these Terms and Conditions</label>
                   </div>
                   <div class="container-fluid text-right">
-                    <button class="btn apply_now" id="submit">Submit
+                    <button class="btn apply_now" id="submit" disabled>Submit
                     </button>
                   </div>
                 </div>
-              </form>
+
 
 
             </li>
@@ -459,8 +463,8 @@
     </main>
   </div>
   <!-- Page 4-->
-  <div data-role="page" id="stage4">
-    <!--header-->
+  <!--div data-role="page" id="stage4">
+    <header>
     <header data-role="header" data-position="fixed" class="container">
       <div class="title_bar">
         <span style="float:left">
@@ -468,7 +472,7 @@
             <i class="fa fa-angle-left fa-lg"></i> Back</a>
         </span>
 
-        <img src="Steward Bank Logo.jpg" class="main-logo">
+        <img src="Logo.jpg" class="main-logo">
       </div>
       <div class="progress_wrapper">
         <div class="progressbar">
@@ -491,7 +495,7 @@
         </div>
       </div>
     </header>
-    <!--/header-->
+    
 
     <main role="main" class="container">
 
@@ -518,15 +522,11 @@
         </div>
       </div>
     </main>
-  </div>
+  </div-->
 
   <script>
     $(document).ready(function () {
-
       $("#signature").jSignature();
-      $('<input type="button" value="Reset">').bind('click', function (e) {
-        $("#signature").jSignature('reset')
-      }).appendTo("#tools")
     })
   </script>
   <script src="form.js"></script>

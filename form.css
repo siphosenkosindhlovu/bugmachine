@@ -97,17 +97,13 @@ color: rgb(39, 39, 39);
 letter-spacing: 0.01px;
 font-style: italic;
 }
+.has-error input{
+    border-bottom: 2px solid #a94442;
+}
+.has-success input{
+    border-bottom: 2px solid #5E2187
+}
 
-.select-style{
-}
-.select-style select{
-    border: none;
-    background: transparent;
-    font-size: 14px;
-    width: 100%;
-    border-radius: 0px !important;
-    border-bottom: 2px solid #cccccc;
-}
 .awkward-spinning-circle{
     width: 120px;
     height: 120px;
@@ -137,6 +133,8 @@ font-style: italic;
     right: 20px;
     left: auto;
 }
+
+
 @media(min-width: 768px){
     main.container{
 
