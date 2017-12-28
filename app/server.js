@@ -2,10 +2,17 @@ var http = require('http');
 var express = require('express');
 var app = express();
 var mysql = require('mysql');
+var morgan = require('morgan');
+var sequelize = require('sequelize');
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
 var multer = require("multer");
 var Nexmo = require('nexmo');
 var upload = multer();
+var path = require('path');
+var hookJWTStrategy = require('./services/passportStrategy')
+var app = express();
 
 var nexmo = new Nexmo({
     apiKey: '8426eb19',
@@ -25,9 +32,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(passport.initialize());
+hookJWTStrategy(passport);
+app.use(morgan('dev'));
 var con = mysql.createConnection({
     host: 'localhost',
-    port: '3308',
+    port: '8888',
     user: 'root',
     password: '',
     database: 'banked',
@@ -48,31 +58,27 @@ var server = app.listen(3000, "127.0.0.1", function () {
     console.log("Example app listening at http://%s:%s", host, port)
 
 });
-app.use(express.static('public'));
+var api = require('./routes/api');
+
+
+
+app.use(express.static(__dirname + '/../public'));
+
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + "/" + "index.html");
+    //res.sendFile(__dirname + "/" + "login.html");
+    res.sendFile(path.join(__dirname + '/../public/index.html'));
 
 });
-app.get('/signup', function (req, res) {
-    res.sendFile(__dirname + "/" + "form.html");
 
-});
-app.post('/login', function (req, res) {
+app.use('/api', api(passport));
 
-})
-app.get('/accounts', function (req, res) {
-    con.query('select * from accounts', function (error, results, fields) {
-        if (error) throw error;
-        res.end(JSON.stringify(results));
-    });
-});
-app.post('/upload', upload.fields([]), function (req, res) {
+/*app.post('/upload', upload.fields([]), function (req, res) {
     console.log("posted");
     var postData = req.body;
-    var sql = "INSERT INTO accounts (Card_Number,First_Name,Last_Name,Date_of_Birth,Address,Mobile,I_D,Proof_of_Residence,Head_Image,Signature,Agent_Registered) VALUES ('" + postData.cardnum + "','" + postData.firstName + "','" + postData.lastName + "','" + postData.dob + "','" + postData.address + "','" + postData.phone + "','" + postData.idpicture + "','" + postData.proofpicture + "','" + postData.headpicture + "','" + postData.signature + "','" + "Sipho" + "')";
+    console.log(postData.cardnum);
+    var sql = "INSERT INTO accounts (Card_Number,First_Name,Last_Name,Date_of_Birth,Address,Mobile,I_D,Copy_of_ID,Proof_of_Residence,Head_Image,Signature,Agent_Registered) VALUES ('" + postData.cardnum + "','" + postData.firstName + "','" + postData.lastName + "','" + postData.dob + "','" + postData.address + "','" + postData.phone + "','" + postData.idnumber + "','" + postData.idpicture + "','" + postData.proofpicture + "','" + postData.headpicture + "','" + postData.signature + "','" + "Sipho" + "')";
     con.query(sql, function (error, results) {
-        if (error) throw error;
-        res.end(JSON.stringify(results));
+        if (error) res.send(error);
+        res.send("Account created successfully.");
     });
-    res.end("Sipho");
-});
+});*/

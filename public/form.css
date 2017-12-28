@@ -1,0 +1,152 @@
+
+body{
+
+    background: rgba(92, 53, 122, 0.082);
+}
+@-webkit-keyframes awkward-spin{
+    from{
+        -webkit-transform: rotate(0deg);
+    }to{
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes awkward-spin{
+    from{
+        transform: rotate(0deg);
+    }to{
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes awkward-open{
+    0%{
+        -webkit-transform: scale(1);
+    }50%{
+        -webkit-transform: scale(1.2);
+    }100%{
+        -webkit-transform: scale(1);
+    }
+}
+@keyframes awkward-open{    
+    0%{
+        transform: scale(1);
+    }50%{
+        transform: scale(1.2);
+    }100%{
+        transform: scale(1);
+    }
+}
+div[data-role=page]{/* Rectangle 3: */
+    background: transparent;
+    padding-bottom: 50px;
+}
+main.container{
+    background: transparent !important;;
+    box-shadow: 0 0 0 transparent;
+}
+.progress_wrapper{
+    height: 30px;
+    background: white;
+    padding: 10px 15px;
+}
+.progressbar{
+    width: 80%;
+    height: 10px;/* Rectangle 2: */
+    background: #D8D8D8;
+    border: 2px solid #FFFFFF;
+}
+#progress_inner{
+    height: 100%;
+    width: 25%;
+    background: #5E2187;
+}
+.help-btn{
+    float: right;
+    margin-top: -15px;
+    position: relative;
+}
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper, .ui-btn{
+    text-shadow: none !important;
+}
+.ui-btn{
+    width: auto !important;
+}
+.form-container{/* Rectangle 4: */
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);
+    padding-bottom: 25px;
+}
+
+form input{
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    transition: all 0.3s;
+    width: 100%;
+    margin: 0 auto
+}
+form input[type=checkbox]{
+    width: auto;
+    margin: 5px
+}
+form input:focus{
+    outline: none;
+    border-bottom: 2px solid #5E2187;
+}
+#signature{
+    border: 2px solid #cccccc;
+}
+form label{
+    /* First name: */
+font-size: 12px;
+color: rgb(39, 39, 39);
+letter-spacing: 0.01px;
+font-style: italic;
+}
+.has-error input{
+    border-bottom: 2px solid #a94442;
+}
+.has-success input{
+    border-bottom: 2px solid #5E2187
+}
+
+.awkward-spinning-circle{
+    width: 120px;
+    height: 120px;
+    border: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    position: relative;
+   /* animation-name: awkward-spin;
+    animation-duration: 3s;*/
+    margin: 30px auto;
+    transition: all 0.5s;
+}
+.eye-left, .eye-right{
+    width: 10px;
+    height: 10px;
+    background: #5E2187;
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    border-radius: 50%;
+    animation-name: awkward-open;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.eye-right{
+    right: 20px;
+    left: auto;
+    animation-delay: 0.3s
+}
+
+
+@media(min-width: 768px){
+    main.container{
+
+    background: #FFFFFF !important;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);
+    }
+    .form-container{
+        padding: 25px;
+        box-shadow: none;
+    }
+}
