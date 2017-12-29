@@ -107,7 +107,9 @@ font-style: italic;
 .has-success input{
     border-bottom: 2px solid #5E2187
 }
-
+.loader-custom{
+    position: relative;
+}
 .awkward-spinning-circle{
     width: 120px;
     height: 120px;
@@ -137,8 +139,18 @@ font-style: italic;
     left: auto;
     animation-delay: 0.3s
 }
+.loaded-success .eye-left, .loaded-success .eye-right, .loaded-fail .eye-right, .loaded-fail .eye-left {
+    animation-duration: 0s
+}
+.loaded-success .awkward-spinning-circle{
+    border-bottom :3px solid #5E2187;
+    border-radius : 50%
+}
 
-
+.loaded-fail .awkward-spinning-circle{
+    border-bottom :3px solid #5E2187;
+    border-radius : 0%
+}
 @media(min-width: 768px){
     main.container{
 

@@ -188,7 +188,6 @@ footer a, footer a:link {
           <i class="fa fa-user"></i>
           <input required type="password" id="password" name="password" placeholder="Password" />
           <i class="fa fa-key"></i>
-          <a href="#">Forgot your password?</a>
           <button>
             <i class="spinner"></i>
             <span class="state">Log in</span>
@@ -203,8 +202,9 @@ footer a, footer a:link {
   $(document).ready(function(){
     $("#loginform").submit(function(e){
       e.preventDefault();
+      $(".login").addClass("loading");
+      
       var form = document.forms[0];
-      console.log($("#loginform").serialize());
       var cred = {
         username: form.username.value,
         password: form.password.value
@@ -215,11 +215,22 @@ footer a, footer a:link {
         url: 'api/authenticate',
         method: 'POST',
         data: cred,
-        dataType: 'json',
-        processData: false,
-        contentType: false,
-        success: function(success){
-          console.log(success);
+        success: function(response){
+          if(response.success){
+            var token = response.token;
+            $(".login").removeClass("loading");
+            $.ajax({
+              url: 'api/profile',
+              method: 'GET',
+              headers:{
+                Authorization : token,
+              },
+              success: function(){
+                localStorage.setItem('username', form.username.value);
+                localStorage.setItem('Authorization', token);
+              }
+            })
+          }
         },
         error: function(err){
           console.log(err);

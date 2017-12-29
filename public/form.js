@@ -1,9 +1,7 @@
 $(document).ready(function () {
-    var xhr = new XMLHttpRequest;
+    //var xhr = new XMLHttpRequest;
 
-    function checkLocal() {
 
-    }
     // Before using it we must add the parse and format functions
     // Here is a sample implementation using moment.js
     validate.extend(validate.validators.datetime, {
@@ -77,8 +75,8 @@ $(document).ready(function () {
             presence: true,
             // Zip is optional but if specified it must be a 5 digit long number
             format: {
-                pattern: "[\+][0-9]{12}",
-                message: "Number should be in the format +263777123456"
+                pattern: "[0-9]{12}",
+                message: "Number should be in the format 263777123456 (that without the '+'"
             }
         },
         cardnum: {
@@ -266,18 +264,26 @@ $(document).ready(function () {
         }
     })
     //Handles errors if there is an issue connecting to server
-    function xhrerrorhandler(pendingform, errorEvent) {
+    function xhrerrorhandler(pendingform) {
         var pendingForm = pendingform;
-        if (!(localStorage.getItem(pendingForm.cardnum)))
+        console.log(pendingForm)
+        if (!localStorage.getItem(pendingForm.cardnum)){
             localStorage.setItem(pendingForm.cardnum, JSON.stringify(pendingForm));
-        $('.eye-left, .eye-right').css('animation-duration', '0s')
-        $(".awkward-spinning-circle").css('border-bottom', '3px solid #5E2187')
-        $("#messageDisp").html('<h3>Connection error<small> Data will be uploaded once a connection is established and you will recieve a confirmation SMS');
+            console.log(localStorage.getItem(pendingForm.cardnum));
+        }else{
+            console.log("What else")
+        }
+        setTimeout(function () {
+            $(".loader-custom").addClass("loaded-fail");
+            $("#messageDisp").html('<h3>Connection error<small> Data will be uploaded once a connection is established and you will recieve a confirmation SMS');
+        }, 1500)
         console.log("Stored")
     }
+
     $('#submit').on('click', function (e) {
         e.preventDefault();
         submitHandler(formValues);
+        $("#finaSubmit").click();
     })
 
     function submitHandler(submitForm) {
@@ -285,47 +291,41 @@ $(document).ready(function () {
         var fd = new FormData();
         for (var key in formObj) {
             fd.append(key, formObj[key]);
-            //console.log(key + " : " + formObj[key]);
         }
         $.ajax({
             url: '/upload',
             method: "POST",
             dataType: 'json',
-            data : fd,
+            data: fd,
             processData: false,
             contentType: false,
-            success: function(result){
-                $('.eye-left, .eye-right').css('animation-duration', '0s')
-                $(".awkward-spinning-circle").css({
-                    'border-bottom' :'3px solid #5E2187',
-                    'border-radius' : '50%'
-                } )
-                $("#messageDisp").html('<h3>Success<small> Request sent. Your account is being prepared and you will recieve a confirmation SMS');
-                console.log("Submitted");
+            success: function (result) {
+                setTimeout(function () {
+                    $(".loader-custom").addClass("loaded-success");
+                    $("#messageDisp").html('<h3>Success<small> Request sent. Your account is being prepared and you will recieve a confirmation SMS');
+                    console.log("Submitted");
+                }, 1500)
+
             },
-            error: function(err){
-                console.log(err);
-            }
-        })
-        /*xhr.timeout = 3000;
-        xhr.open('POST', '/upload');
-        xhr.send(fd);
-        xhr.addEventListener('load', function (e) {
-            if (e.target.status >= 400) {
+            error: function (error) {
                 xhrerrorhandler(formObj);
-            } else {
-                //will parse the data here
-                $('.eye-left, .eye-right').css('animation-duration', '0s')
-                $(".awkward-spinning-circle").css({
-                    'border-bottom' :'3px solid #5E2187',
-                    'border-radius' : '50%'
-                } )
-                $("#messageDisp").html('<h3>Success<small> Request sent. Your account is being prepared and you will recieve a confirmation SMS');
-                console.log("Submitted");
-            }
-        });
-        xhr.addEventListener('timeout', xhrerrorhandler(formObj));
-        xhr.addEventListener('error', xhrerrorhandler(formObj));*/
-        $("#finaSubmit").click()
+            },
+            timeout: 3000
+        })
     }
+
+    function loadLocal() {
+        if (window.localStorage.length !== 0) {
+            var len = window.localStorage.length;
+            var form = {};
+            while (len--) {
+                var key = localStorage.key(len)
+                if(key !== "Authorized" || key !== "username"){
+                    form = JSON.parse(localStorage.getItem(key));
+                    submitHandler(form);
+                }
+            }
+        }
+    }
+
 })

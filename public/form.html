@@ -87,13 +87,13 @@
         <form name="signup" id="signup" data-enhance=false>
           <div class="row">
             <div class="form-group col-sm-6">
-              <input type="text" name="firstName">
+              <input type="text" name="firstName" placeholder="John">
               <label for="firstName">First Name</label>
               <div class="messages"></div>
             </div>
 
             <div class="form-group col-sm-6">
-              <input type="text" name="lastName">
+              <input type="text" name="lastName" placeholder="Doe">
               <label for="lastName">Last Name</label>
               <div class="messages"></div>
             </div>
@@ -102,13 +102,13 @@
 
           <div class="row">
             <div class="form-group col-xs-4">
-              <input type="date" name="dob">
+              <input type="date" name="dob" placeholder="YYYY-MM-DD">
               <label for="dob">Date of Birth</label>
               <div class="messages"></div>
             </div>
 
             <div class="form-group col-xs-8">
-              <input type="text" name="idnumber">
+              <input type="text" name="idnumber" placeholder="00 0000000 Z 00">
               <label for="idnumber">National Identification Number</label>
               <div class="messages"></div>
             </div>
@@ -116,7 +116,7 @@
 
           <div class="row">
             <div class="form-group col-sm-10">
-              <input type="text" name="address">
+              <input type="text" name="address" placeholder="1 Fake Street">
               <label for="address">Address</label>
               <div class="messages"></div>
             </div>
@@ -125,7 +125,7 @@
 
           <div class="row">
             <div class="form-group col-xs-6">
-              <input type="text" name="city">
+              <input type="text" name="city" placeholder="City">
               <label for="city">City/Town</label>
               <div class="messages"></div>
             </div>
@@ -153,13 +153,13 @@
 
           <div class="row">
             <div class="form-group col-sm-6">
-              <input type="tel" name="phone">
+              <input type="tel" name="phone" placeholder="263000000000">
               <label for="phone">Mobile Number</label>
               <div class="messages"></div>
             </div>
 
             <div class="form-group col-sm-6">
-              <input type="number" name="cardnum">
+              <input type="number" name="cardnum" placeholder="1234567812345678">
               <label for="cardnum">Your Card Number</label>
               <div class="messages"></div>
             </div>
@@ -449,9 +449,10 @@
                       <input data-enhance="false" id="tandc" type="checkbox">I accept these Terms and Conditions</label>
                   </div>
                   <div class="container-fluid text-right">
-                    <button class="btn apply_now" id="submit" disabled>Submit
+                    <button class="btn apply_now" id="submit" disabled>
+                        <a href="#stage4" id="finaSubmit" data-transition="slideup">Submit</a>
                     </button>
-                    <a href="#stage4" id="finaSubmit" data-transition="slideup" style="display: none">Submit</a>
+                    
                   </div>
                 </div>
 
@@ -503,13 +504,14 @@
           <small>Processing your request</small>
         </h4>
         <div class="container-fluid">
+          <div class="loader-custom">
           <div class="awkward-spinning-circle">
             <div class="eye-left"></div>
             <div class="eye-right"></div>
           </div>
-
           <h3 id="messageDisp">
           </h3>
+        </div>
           <div class="container-fluid text-right">
             <a href="#" data-transition="slide" class="btn apply_now">Finish</a>
           </div>

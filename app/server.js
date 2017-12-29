@@ -18,12 +18,12 @@ var nexmo = new Nexmo({
     apiKey: '8426eb19',
     apiSecret: '5b62058634d075d1'
 })
-
+/*
 var from = "Sipho";
 var to = 263778359605;
 var text = "Test message";
 
-/*nexmo.message.sendSms(from,to,text,function(error,response){
+nexmo.message.sendSms(from,to,text,function(error,response){
     if(error) throw err;
     else if(response.messages[0].status != '0') throw console.error(response);
     else console.log(response);
@@ -72,13 +72,20 @@ app.get('/', function (req, res) {
 
 app.use('/api', api(passport));
 
-/*app.post('/upload', upload.fields([]), function (req, res) {
+app.post('/upload', upload.fields([]), function (req, res) {
     console.log("posted");
     var postData = req.body;
     console.log(postData.cardnum);
     var sql = "INSERT INTO accounts (Card_Number,First_Name,Last_Name,Date_of_Birth,Address,Mobile,I_D,Copy_of_ID,Proof_of_Residence,Head_Image,Signature,Agent_Registered) VALUES ('" + postData.cardnum + "','" + postData.firstName + "','" + postData.lastName + "','" + postData.dob + "','" + postData.address + "','" + postData.phone + "','" + postData.idnumber + "','" + postData.idpicture + "','" + postData.proofpicture + "','" + postData.headpicture + "','" + postData.signature + "','" + "Sipho" + "')";
     con.query(sql, function (error, results) {
-        if (error) res.send(error);
-        res.send("Account created successfully.");
+        if (error) throw error;
+        var fone = parseInt(postData.phone);
+        var words = "Dear" + postData.firstName + " " + postData.lastName + "account number" + postData.cardnum +". Your account has successfully been created." 
+        nexmo.message.sendSms("Stewie", fone, words, function (error, response) {
+            if (error) throw err;
+            else if (response.messages[0].status != '0') throw console.error(response);
+            else console.log(response);
+        })
+        res.send(results);
     });
-});*/
+});

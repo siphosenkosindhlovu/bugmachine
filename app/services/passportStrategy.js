@@ -14,14 +14,10 @@ function hookJWTStrategy(passport) {
     options.jwtFromRequest = ExtractJwt.fromAuthHeader();
     options.ignoreExpiration = false;
 
-    passport.use(new JWTStrategy(options, function (JWTPayload, callback) {
-        User.findOne({
-                where: {
-                    username: JWTPayload.username
-                }
-            })
-            .then(function (user) {
-                if (!user) {
+    passport.use(new JWTStrategy(options, function(JWTPayload, callback) {
+        User.findOne({ where: { username: JWTPayload.username } })
+            .then(function(user) {
+                if(!user) {
                     callback(null, false);
                     return;
                 }
