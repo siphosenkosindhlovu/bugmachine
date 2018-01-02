@@ -280,25 +280,24 @@ $(document).ready(function () {
         console.log("Stored")
     }
 
-    $('#submit').on('click', function (e) {
+    $("#finaSubmit").on('click', function (e) {
         e.preventDefault();
         submitHandler(formValues);
-        $("#finaSubmit").click();
+        //$().click();
     })
 
     function submitHandler(submitForm) {
         var formObj = submitForm;
+        formObj.agent = localStorage.getItem('username');
+        console.log(formObj);
         var fd = new FormData();
         for (var key in formObj) {
             fd.append(key, formObj[key]);
         }
         $.ajax({
-            url: '/upload',
+            url: 'api/upload',
             method: "POST",
-            dataType: 'json',
-            data: fd,
-            processData: false,
-            contentType: false,
+            data: formObj,
             success: function (result) {
                 setTimeout(function () {
                     $(".loader-custom").addClass("loaded-success");
@@ -308,13 +307,13 @@ $(document).ready(function () {
 
             },
             error: function (error) {
-                xhrerrorhandler(formObj);
+                //xhrerrorhandler(formObj);
             },
             timeout: 3000
         })
     }
 
-    function loadLocal() {
+    /*function loadLocal() {
         if (window.localStorage.length !== 0) {
             var len = window.localStorage.length;
             var form = {};
@@ -326,6 +325,6 @@ $(document).ready(function () {
                 }
             }
         }
-    }
+    }*/
 
 })

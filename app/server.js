@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({
 app.use(passport.initialize());
 hookJWTStrategy(passport);
 app.use(morgan('dev'));
-var con = mysql.createConnection({
+/*var con = mysql.createConnection({
     host: 'localhost',
     port: '8888',
     user: 'root',
@@ -47,7 +47,7 @@ con.connect(function (err) {
     if (err) throw err
     console.log("You are now connected with mysql database");
 })
-
+*/
 
 
 var server = app.listen(3000, "127.0.0.1", function () {
@@ -72,7 +72,7 @@ app.get('/', function (req, res) {
 
 app.use('/api', api(passport));
 
-app.post('/upload', upload.fields([]), function (req, res) {
+/*app.post('/upload', upload.fields([]), function (req, res) {
     console.log("posted");
     var postData = req.body;
     console.log(postData.cardnum);
@@ -88,4 +88,4 @@ app.post('/upload', upload.fields([]), function (req, res) {
         })
         res.send(results);
     });
-});
+});*/

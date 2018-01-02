@@ -5,7 +5,7 @@ var config = module.exports;
 config.db = {
     user: 'root',
     password: '',
-    name: 'sipho',
+    name: 'banked',
 };
 
 config.db.details = {
