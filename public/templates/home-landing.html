@@ -1,0 +1,42 @@
+
+<main class="container" style="background: white !important; padding-top: 25px; height: 100vh">
+    <div class="jumbotron text-center">
+        <div class="loader-custom loaded-success">
+            <div class="awkward-spinning-circle">
+                <div class="eye-left"></div>
+                <div class="eye-right"></div>
+            </div>
+            <h3>
+                Welcome to the Steward Bank portal.
+                <br>
+                <small>What would you like to do?</small>
+            </h3>
+        </div>
+    </div>
+    <div>
+        <div class="row" ng-if="!hc.isAuthenticated()">
+            <div class="col-sm-6">
+                <a class="landing-button" ui-sref="login">
+                    I'm an agent and I want to register new customers
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <a class="landing-button" ui-sref="admin">
+                    I'm an administrator... nuff said...
+                </a>
+            </div>
+        </div>
+        <div class="row text-center" ng-if="hc.isAuthenticated()">
+            <div class="col-sm-6">
+                <a class="landing-button" ui-sref="register.intro">
+                    I want to register for a new account
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <a class="landing-button" ui-sref="admin">
+                    I want to learn more about Steward Bank
+                </a>
+            </div>
+        </div>
+    </div>
+</main>

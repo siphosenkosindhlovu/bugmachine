@@ -1,0 +1,21 @@
+<main class="container" style="background-color: white">
+    <div class="container-fluid form-container">
+      <h4>Step 4 |
+        <small>Processing your request</small>
+      </h4>
+      <div class="container-fluid">
+        <div class="loader-custom" ng-class="{ 'loaded-success': rc.success, 'loaded-fail': rc.error }">
+        <div class="awkward-spinning-circle">
+          <div class="eye-left"></div>
+          <div class="eye-right"></div>
+        </div>
+        <h3 id="messageDisp" class="text-center">
+          {{ rc.responseText }}
+        </h3>
+      </div>
+        <div class="container-fluid text-right">
+          <a ui-sref="register.intro" class="btn apply_now">Finish</a>
+        </div>
+      </div>
+    </div>
+  </main>

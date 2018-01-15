@@ -5,11 +5,11 @@
         .module('bugmachine')
         .controller('LoginController', [
             '$state',
-            'authService',
+            'authenticator',
             loginController
         ]);
 
-    function loginController($state, authService) {
+    function loginController($state, authenticator) {
         var vm = this;
 
         vm.loginError = false
@@ -20,14 +20,14 @@
         function login() {
             vm.loginError = false
             vm.loginErrorMessage = null;
-
+            console.log("click");
             if(!vm.username || !vm.password) {
                 vm.loginError = true;
                 vm.loginErrorMessage = 'Username and password required!';
                 return;
             }
 
-            authService.login(vm.username, vm.password)
+            authenticator.login(vm.username, vm.password)
                 .then(handleSuccessfulLogin)
                 .catch(handleFailedLogin);
         }   

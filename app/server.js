@@ -28,8 +28,11 @@ nexmo.message.sendSms(from,to,text,function(error,response){
     else if(response.messages[0].status != '0') throw console.error(response);
     else console.log(response);
 })*/
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+    limit: '50mb'
+}));
 app.use(bodyParser.urlencoded({
+    limit: '50mb',
     extended: true
 }));
 app.use(passport.initialize());
@@ -50,7 +53,7 @@ con.connect(function (err) {
 */
 
 
-var server = app.listen(3000, "127.0.0.1", function () {
+var server = app.listen(3000, 'localhost' , function () {
 
     var host = server.address().address
     var port = server.address().port
@@ -64,14 +67,15 @@ var api = require('./routes/api');
 
 app.use(express.static(__dirname + '/../public'));
 
-app.get('/', function (req, res) {
+
+
+app.use('/api', api(passport));
+
+app.get('/*', function (req, res) {
     //res.sendFile(__dirname + "/" + "login.html");
     res.sendFile(path.join(__dirname + '/../public/index.html'));
 
 });
-
-app.use('/api', api(passport));
-
 /*app.post('/upload', upload.fields([]), function (req, res) {
     console.log("posted");
     var postData = req.body;

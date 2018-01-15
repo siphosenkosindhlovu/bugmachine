@@ -5,11 +5,11 @@
         .module('bugmachine')
         .controller('SignupController', [
             '$scope',
-            'authService', 
+            'authenticator', 
             signupController
         ]);
 
-    function signupController($scope, authService) {
+    function signupController($scope, authenticator) {
         var vm = this;
 
         vm.signupSuccess = false;
@@ -29,7 +29,7 @@
                 return;
             }
 
-            authService.signup(vm.username, vm.password)
+            authenticator.signup(vm.username, vm.password)
                 .then(handleSuccessfulSignup)
                 .catch(handleFailedSignup);
         }

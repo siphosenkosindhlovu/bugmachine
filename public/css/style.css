@@ -3,19 +3,42 @@
     src: url(corisande_light.ttf);
 }
 body {
-    /* Rectangle 10: */
     font-family: corisandeLight, Arial, Helvetica, sans-serif;
     background: rgba(92, 53, 122, 0.082);
 }
 
-/* Rectangle 3: */
-
-main.container,
-header.container {
-    background: #FFFFFF !important;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+a:hover {
+    cursor: pointer;
 }
+@keyframes enter{
+    from{
+        bottom: -10px;
+        opacity: 0
+    }to{
+        bottom: 0;
+        opacity: 1
+    }
+}
+.ng-enter{
+    position: relative;
+    animation: enter;
+    animation-duration: 0.3s
+}
+main.container {
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
+}
+.main-nav{
+    position: fixed;
+    width: 100%;
+    margin-top: -35px; 
+    z-index: 10;
+}
+.main-view{
+    margin-top: 35px; 
+    position: relative;
+}
 header.container {
     padding: 0;
     background: white;
@@ -32,7 +55,6 @@ main.container {
 
 .title_bar {
     position: relative;
-    width: 100%;
     height: 35px;
     background-color: white;
     text-shadow: none !important;
@@ -46,9 +68,23 @@ main.container {
 .title_bar a:hover{
     text-decoration: none
 }
-.title_bar span{
+.title_bar > span{
     position: absolute;
     left: 15px;
+}
+
+.landing-button{
+    display: block;
+    text-align: center;
+    padding: 15px;
+    color: white;
+    background: #5E2187;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.landing-button:hover{
+    color: white;
+    text-decoration: none;
 }
 .banner_nav_wrapper {
     height: 35px;

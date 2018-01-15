@@ -1,0 +1,131 @@
+<main role="main" class="container">
+  <h3 class="">Welcome.
+    <small>Apply in just minutes.</small>
+  </h3>
+  <div class="container-fluid form-container">
+    <h4>Step 1 |
+      <small>Your Basic Information</small>
+    </h4>
+    <br>
+    <form name="signup" id="signup" data-enhance=false>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <input type="text" name="firstName" ng-model="rc.formData.firstName" placeholder="John">
+          <label for="firstName">First Name</label>
+          <div class="messages"></div>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <input type="text" name="lastName" ng-model="rc.formData.lastName" placeholder="Doe">
+          <label for="lastName">Last Name</label>
+          <div class="messages"></div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="form-group col-xs-4">
+          <input type="date" name="dob" ng-model="rc.formData.dob" placeholder="YYYY-MM-DD">
+          <label for="dob">Date of Birth</label>
+          <div class="messages"></div>
+        </div>
+
+        <div class="form-group col-xs-8">
+          <input type="text" name="idnumber" ng-model="rc.formData.idnumber" placeholder="00 0000000 Z 00">
+          <label for="idnumber">National Identification Number</label>
+          <div class="messages"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-10">
+          <input type="text" name="address" ng-model="rc.formData.address" placeholder="1 Fake Street">
+          <label for="address">Address</label>
+          <div class="messages"></div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input type="text" name="city" ng-model="rc.formData.city" placeholder="City">
+          <label for="city">City/Town</label>
+          <div class="messages"></div>
+        </div>
+
+        <div class="form-group col-xs-6">
+          <div class="select-style">
+            <select name="province" ng-model="rc.formData.province">
+              <option value="Harare">Harare</option>
+              <option value="Bulawayo">Bulawayo</option>
+              <option value="Mashonaland West">Mashonaland West</option>
+              <option value="Mashonaland East">Mashonaland East</option>
+              <option value="Mashonaland Central">Mashonaland Central</option>
+              <option value="Matebeleland North">Matebeleland North</option>
+              <option value="Matebeleland South">Matebeleland South</option>
+              <option value="Midlands">Midlands</option>
+              <option value="Manicaland">Manicaland</option>
+              <option value="Masvingo">Masvingo</option>
+            </select>
+          </div>
+          <label for="province">Province</label>
+          <div class="messages"></div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <input type="tel" name="phone" ng-model="rc.formData.phone" placeholder="263000000000">
+          <label for="phone">Mobile Number</label>
+          <div class="messages"></div>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <input type="number" name="cardnum" ng-model="rc.formData.cardnum" placeholder="1234567812345678">
+          <label for="cardnum">Your Card Number</label>
+          <div class="messages"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <input type="file" name="headpicture" ng-model="rc.fileData.headpicture" accept=".jpg" base-sixty-four-input>
+          <label for="headpicture">Headshot Image</label>
+          <div class="messages"></div>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <input type="file" name="idpicture" ng-model="rc.fileData.idpicture" accept=".jpg" base-sixty-four-input>
+          <label for="idpicture">Copy of National Identity Card</label>
+          <div class="messages"></div>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="file" name="proofpicture" ng-model="rc.fileData.proofpicture" accept=".jpg" base-sixty-four-input>
+          <label for="proofpicture">Copy of Proof of Residence</label>
+          <div class="messages"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div id="signature"></div>
+
+          <div id="tools"><button id="save" type="button" ng-click="rc.saveSig()">Save</button><button id="save" type="button" ng-click="rc.resetSig()">Reset</button></div>
+          <label for="signature">Customer Signature(Sign on your screen)</label>
+        </div>
+        <div class="col-xs-6">
+          <img ng-src="{{ rc.formData.signature }}">
+        </div>
+      </div>
+      <script>
+        $(document).ready(function () {
+          $("#signature").jSignature();
+        })
+      </script>
+      <br>
+      <div class="text-right">
+        <!--button class="btn btn-default" type="submit">Cancel Application</button-->
+        <a ui-sref="register.step1" class="btn btn-default" ng-click="rc.width = '50%'">Back</a>  <button type="submit" class="btn apply_now" ng-click="rc.processForm()">Continue</button>
+      </div>
+    </form>
+  </div>
+</main>

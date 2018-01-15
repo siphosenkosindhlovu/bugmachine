@@ -1,0 +1,27 @@
+<main class="container" style="background: white !important">
+    <h2>Total number of acounts: {{ac.summary.accdata}}</h2>
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        Account Number
+                    </td>
+                    <td>
+                        Account Holder
+                    </td>
+                    <td>
+                        Created on
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="account in ac.accounts">
+                    <td> {{account.Card_Number}}</td>
+                    <td> {{account.First_Name}} {{account.Last_Name }}</td>
+                    <td> {{account.createdAt | date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

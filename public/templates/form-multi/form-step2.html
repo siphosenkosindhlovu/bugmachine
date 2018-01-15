@@ -1,0 +1,93 @@
+
+<main class="container">
+
+    <h3>Welcome.
+        <small>Apply in just minutes.</small>
+    </h3>
+    <div class="container-fluid form-container">
+        <h4>Step 2 |
+            <small>Review Your Information</small>
+        </h4>
+
+        <br>
+
+        <h4>Hello
+            <span>{{ rc.formData.firstName }}</span>
+            <small>Please take a moment to review the information you entered</small>
+        </h4>
+        <div class="container-fluid">
+            <table id="previewTable" class="table table-condensed table-responsive">
+                <tr>
+                    <td>First Name</td>
+                    <td>
+                        <span >{{ rc.formData.firstName }}</span>
+                    </td>
+                </tr>
+
+                <td>Last Name</td>
+                <td>
+                    <span>{{ rc.formData.lastName }}</span>
+                </td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td>
+                        <span>{{rc.formData.dob | date}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>I.D Number</td>
+                    <td>
+                        <span>{{rc.formData.idnumber}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>
+                        <span>{{rc.formData.address}}</span>,
+                        <span>{{rc.formData.city}}</span>,
+                        <span>{{rc.formData.province}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mobile</td>
+                    <td>
+                        <span>{{rc.formData.phone}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Card Number</td>
+                    <td>
+                        <span>{{rc.formData.cardnum}}</snumpan>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="col-sm-4">
+                            <img class="img-responsive" ng-src="{{rc.formData.headpicture}}">
+                        </div>
+                        <div class="col-sm-4">
+                            <img class="img-responsive" ng-src="{{rc.formData.idpicture}}">
+                        </div>
+                        <div class="col-sm-4">
+                            <img class="img-responsive" ng-src="{{rc.formData.proofpicture}}">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Signature</td>
+                    <td>
+                        <img ng-src="{{ rc.formData.signature }}">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        If any of these are incorect please
+        <a ui-sref="register.step3">go back</a> and correct.
+        <div class="row">
+            <div class="container-fluid text-right">
+                    <a ui-sref="register.step1" class="btn btn-default" ng-click="rc.width = '50%'">Back</a> <a ui-sref="register.step3" class="btn apply_now" ng-click="rc.width = '75%'">Continue</a>
+            </div>
+        </div>
+    </div>
+</main>

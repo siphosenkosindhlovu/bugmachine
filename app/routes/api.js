@@ -16,7 +16,9 @@ var APIRoutes = function (passport) {
     // POST Routes.
     router.post('/signup', AuthController.signUp);
     router.post('/authenticate', AuthController.authenticateUser);
-    router.post('/upload', upload.fields([]) , AccController.create);
+    router.post('/accounts/create', passport.authenticate('jwt', {
+        session: false
+    }), allowOnly(config.accessLevels.user, AccController.create));
 
     // GET Routes.
     router.get('/profile', passport.authenticate('jwt', {
@@ -25,7 +27,12 @@ var APIRoutes = function (passport) {
     router.get('/admin', passport.authenticate('jwt', {
         session: false
     }), allowOnly(config.accessLevels.admin, AdminController.index));
-
+    router.get('/accounts/retrive/:accNumber?', passport.authenticate('jwt', {
+        session: false
+    }), allowOnly(config.accessLevels.admin, AccController.retrive));
+    router.get('/agents/retrive/:agentName?', passport.authenticate('jwt', {
+        session: false
+    }), allowOnly(config.accessLevels.admin, AccController.agents));
     return router;
 };
 

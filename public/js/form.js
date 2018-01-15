@@ -96,9 +96,7 @@ $(document).ready(function () {
     // Hook up the form so we can prevent it from being posted
     var form = document.querySelector("form#signup");
     form.addEventListener("submit", function (ev) {
-        ev.preventDefault();
-        showSuccess()
-        //handleFormSubmit(form);
+        handleFormSubmit(form);
     });
 
     // Hook up the inputs to validate on the fly

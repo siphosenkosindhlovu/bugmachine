@@ -1,0 +1,55 @@
+<main class="container" style="background: white !important">
+    <div class="jumbotron">
+        <div class="text-center">
+            <h1>{{ ac.message }}</h1>
+        </div>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-sm-4">
+                    <h3>{{ ac.summary.accdata }}
+                        <small>Registered accounts</small>
+                    </h3>
+                    
+                </div>
+                <div class="col-sm-4">
+                    <h3>
+                            {{ ac.summary.agentCount }}
+                        
+                        <small>Registered agents</small>
+                    </h3>
+                    
+                </div>
+                <div class="col-sm-4">
+                    <h3><a ui-sref="allAccounts">View All Opened Accounts</a></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <h2>Agent Activity</h2>
+        <div class="row">
+            <div ng-repeat="agent in ac.agents">
+            <div class="col-sm-6" ng-if="$even">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Agent ID: {{ agent.agentName }}
+                        </div>
+                        <div class="panel-body">
+                            Number of accounts opened: {{ agent.accountCount }}
+                        </div>
+                    </div>
+            </div>
+            <div class="col-sm-6" ng-if="$odd">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Agent ID: {{ agent.agentName }}
+                        </div>
+                        <div class="panel-body">
+                            Number of accounts opened: {{ agent.accountCount}}
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</main>

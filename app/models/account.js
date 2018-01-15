@@ -5,7 +5,7 @@ var config = require('../config'),
 var accountDefinition = {
     Card_Number: {
         type: Sequelize.STRING,
-        unique: true,
+        primaryKey: true,
         allowNull: false,
     },
     First_Name: {

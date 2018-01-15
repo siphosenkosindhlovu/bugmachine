@@ -4,7 +4,9 @@
 
     var bugmachine = angular.module('bugmachine', [
         'ui.router',
-        'ngCookies'
+        'ngCookies',
+        'ngAnimate',
+        'naif.base64'
     ]);
 
     bugmachine.factory('requestInterceptor', [
@@ -68,21 +70,22 @@
         // Index route.
         $stateProvider.state('index', {
             url: '/',
-            templateUrl: 'app/views/partials/partial-index.html'
+            templateUrl: 'templates/home-landing.html',
+            controller: 'HomeController as hc'
         });
 
         // Login route.
         $stateProvider.state('login', {
             url: '/login',
-            templateUrl: 'app/views/partials/partial-login.html',
+            templateUrl: 'templates/login-template.html',
             controller: 'LoginController as lc'
         });
 
         // User area route.
         $stateProvider.state('profile', {
             url: '/profile',
-            templateUrl: 'app/views/partials/partial-profile.html',
-            controller: 'ProfileController as pc',
+            templateUrl: 'templates/agent.overview.html',
+            controller: 'AgentController as ag',
             data: {
                 accessLevel: staticData.accessLevels.user
             }
@@ -91,20 +94,54 @@
         // Admin area route.
         $stateProvider.state('admin', {
             url: '/admin',
-            templateUrl: 'app/views/partials/partial-admin.html',
+            templateUrl: 'templates/admin.html',
             controller: 'AdminController as ac',
             data: {
                 accessLevel: staticData.accessLevels.admin
             }
         });
+        $stateProvider.state('allAccounts', {
+            url: '/accounts',
+            templateUrl: 'templates/accounts-preview.html',
+            controller: 'AdminController as ac',
+            data: {
+                accessLevel: staticData.accessLevels.admin
+            }
+        })
 
-        // Signup route.
-        $stateProvider.state('signup', {
-            url: '/signup',
-            templateUrl: 'templates/signup-template.html',
-            controller: 'SignupController as sc'
+        // Register account route.
+        $stateProvider.state('register', {
+            abstract: true,
+            url: '/register',
+            templateUrl: 'templates/form-multi/form-skele.html',
+            controller: 'RegisterController as rc',
         });
 
+        $stateProvider.state('register.intro', {
+            url: '',
+            templateUrl: 'templates/form-multi/form-intro.html',
+        })
+
+        $stateProvider.state('register.step1', {
+            url: '/step1',
+            templateUrl: 'templates/form-multi/form-step1.html',
+        })
+
+        $stateProvider.state('register.step2', {
+            url: '/step2',
+            templateUrl: 'templates/form-multi/form-step2.html',
+        })
+
+        $stateProvider.state('register.step3', {
+            url: '/step3',
+            templateUrl: 'templates/form-multi/form-step3.html',
+        })
+
+        $stateProvider.state('register.final', {
+            url: '/final',
+            templateUrl: 'templates/form-multi/form-final.html',
+        })
+        
         $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('requestInterceptor');
     }
@@ -113,14 +150,16 @@
     bugmachine.run([
         '$rootScope',
         '$state',
-        'authService',
+        'authenticator',
         authRun
     ]);
 
-    function authRun($rootScope, $state, authService) {
+    function authRun($rootScope, $state, authenticator) {
         $rootScope.$on('$stateChangeStart', function (event, toState) {
+            console.log(toState);
             if (toState.data && toState.data.accessLevel) {
-                var user = authService.getUserData();
+                var user = authenticator.getUserData();
+                console.log(toState);
                 if (!(toState.data.accessLevel & user.role)) {
                     event.preventDefault();
                     $state.go('index');
@@ -130,4 +169,4 @@
         });
     }
 
-})
+})();

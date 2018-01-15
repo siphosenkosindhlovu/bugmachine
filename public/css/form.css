@@ -43,12 +43,26 @@ main.container{
     background: transparent !important;;
     box-shadow: 0 0 0 transparent;
 }
+.form-head{
+    position: fixed;
+    margin: 0 auto;
+    left: 0;
+    right:0;
+    background-color: white;
+    z-index: 1;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+}
+
+.form-head + div {
+    padding-top: 45px
+}
 .progress_wrapper{
     height: 30px;
     background: white;
     padding: 10px 15px;
+    margin-bottom: 15px
 }
-.progressbar{
+.progress{
     width: 80%;
     height: 10px;/* Rectangle 2: */
     background: #D8D8D8;
@@ -61,7 +75,7 @@ main.container{
 }
 .help-btn{
     float: right;
-    margin-top: -15px;
+    margin-top: -35px;
     position: relative;
 }
 .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper, .ui-btn{
@@ -120,6 +134,7 @@ font-style: italic;
     animation-duration: 3s;*/
     margin: 30px auto;
     transition: all 0.5s;
+    transition-delay: 0.7s
 }
 .eye-left, .eye-right{
     width: 10px;
@@ -137,7 +152,6 @@ font-style: italic;
 .eye-right{
     right: 20px;
     left: auto;
-    animation-delay: 0.3s
 }
 .loaded-success .eye-left, .loaded-success .eye-right, .loaded-fail .eye-right, .loaded-fail .eye-left {
     animation-duration: 0s

@@ -1,13 +1,14 @@
 <div class="wrapper">
   <form id="loginform" class="login">
     <p class="title">Agent Log in</p>
-    <input required type="text" data-ng-model="username" id="username" name="username" placeholder="Username" autofocus/>
+    <div class="alert alert-danger" ng-if="lc.loginError" role="alert">{{ lc.loginErrorMessage }}</div>
+    <input required type="text" data-ng-model="lc.username" id="username" name="username" placeholder="Username" autofocus/>
     <i class="fa fa-user"></i>
-    <input required type="password" data-ng-model="username" id="password" name="password" placeholder="Password" />
+    <input required type="password" data-ng-model="lc.password" id="password" name="password" placeholder="Password" />
     <i class="fa fa-key"></i>
-    <button>
+    <button ng-click="lc.login()">
       <i class="spinner"></i>
-      <span class="state" ng-click="login()">Log in</span>
+      <span class="state"></span>Log in</span>
     </button>
   </form>
 </div>

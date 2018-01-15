@@ -1,0 +1,100 @@
+<main class="container" style="background: white !important; position: relative">
+    <div id="warningModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Error
+                    </h4>
+
+                </div>
+                <div class="modal-body">
+                    <p>Status code {{ag.error.status}}</p>
+                    <p>{{ag.error.statusText}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="ag.load()"><i class="fa fa-repeat"></i> Retry</button>
+                    <button type="button" class="btn btn-default" ng-click="ag.close()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="uploaderror" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Error
+                    </h4>
+
+                </div>
+                <div class="modal-body">
+                    <p>Error Uploading</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="ag.submit()"><i class="fa fa-repeat"></i> Retry</button>
+                    <button type="button" class="btn btn-default" ng-click="ag.cancel()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <div class="text-center">
+            <h1>{{ ag.message }}</h1>
+        </div>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-sm-4">
+                    <h3>{{ ag.accdata.summary }}
+                        <small>Registered accounts</small>
+                    </h3>
+
+                </div>
+                <div class="col-sm-4">
+                    <h3>
+                        {{ ag.accdata.pendingAcc.length }}
+                        <small>Accounts pending upload</small>
+                    </h3>
+
+                </div>
+                <div class="col-sm-4">
+                    <h3>
+                        <a ui-sref="allAccounts">View All Opened Accounts</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-9">
+                <h4>Accounts Pending Upload </h4>
+            </div>
+            <div ng-if="ag.local()" class="col-xs-3 text-right ">
+                <button class="btn btn-default" ng-click="ag.submit()">Upload</button>
+            </div>
+        </div>
+        <div class="text-center" ng-if="!ag.local()">
+            (No accounts pending upload)
+        </div>
+        <div ng-repeat="account in ag.accdata.pendingAcc" class="row">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Card Number: {{ account.cardnum }}
+                </div>
+                <div class="panel-body">
+                    <div class="col-xs-4">
+                        {{ account.firstName }} {{ account.lastName }}
+                    </div>
+                    <div class="col-xs-6">
+                        {{ account.idnumber }}
+                    </div>
+                    <div class="col-xs-2">
+                        {{ account.city }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
