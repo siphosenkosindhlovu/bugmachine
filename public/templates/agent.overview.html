@@ -13,7 +13,7 @@
                     <p>{{ag.error.statusText}}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" ng-click="ag.load()"><i class="fa fa-repeat"></i> Retry</button>
+                    <button type="button" class="btn btn-default" ng-click="ag.load()"><span class="glyphicon glyphicon-repeat"></span> Retry</button>
                     <button type="button" class="btn btn-default" ng-click="ag.close()">Close</button>
                 </div>
             </div>
@@ -77,7 +77,7 @@
         <div class="text-center" ng-if="!ag.local()">
             (No accounts pending upload)
         </div>
-        <div ng-repeat="account in ag.accdata.pendingAcc" class="row">
+        <div ng-if="ag.local()" ng-repeat="account in ag.accdata.pendingAcc" class="row">
 
             <div class="panel panel-default">
                 <div class="panel-heading">

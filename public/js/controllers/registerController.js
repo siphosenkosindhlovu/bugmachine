@@ -63,16 +63,16 @@
                     vm.responseText = response.data.message;
                 }).catch(function (response) {  
                     if(response.status < 0){
-                        vm.responseText = "Unauthorised"
+                        vm.responseText = "Not Connected. Account data will be stored for later upload"
                     }else{
-                        console.log(response);
+                        vm.responseText = "Server error"
                     }
                     $state.go(
                         'register.final'
                     )
                     vm.success = false;
                     vm.error = true;
-                    localHelper.addToStorage(vm.formData.cardnum)
+                    localHelper.addToStorage(vm.formData)
                 })
         }
 

@@ -1,4 +1,9 @@
-<main class="container" style="background: white !important">
+<div ng-if="ac.loading">
+    <div>
+        <h2>Loading...</h2>
+    </div>
+</div>
+<main ng-if="!ac.loading" class="container" style="background: white !important">
     <div class="jumbotron">
         <div class="text-center">
             <h1>{{ ac.message }}</h1>

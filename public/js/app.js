@@ -6,7 +6,8 @@
         'ui.router',
         'ngCookies',
         'ngAnimate',
-        'naif.base64'
+        'naif.base64',
+        'ng-appcache'
     ]);
 
     bugmachine.factory('requestInterceptor', [
@@ -141,7 +142,11 @@
             url: '/final',
             templateUrl: 'templates/form-multi/form-final.html',
         })
-        
+        //Redirect when user is unauthorised
+        $stateProvider.state('forbidden', {
+            url: '/unaathorised',
+            templateUrl: 'templates/unauthorised.html',
+        })
         $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('requestInterceptor');
     }

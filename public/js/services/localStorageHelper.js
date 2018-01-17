@@ -12,7 +12,8 @@
         }
 
         function addToStorage(formObj){
-            if(!(storage.getItem(formObj.cardnum))) storage.setItem(formObj.cardnum, JSON.stringify(formObj));
+            storage.setItem(formObj.cardnum, JSON.stringify(formObj));
+            console.log(formObj);
         };
 
         function retriveFromStorage(){
@@ -38,7 +39,7 @@
         function deleteFromStorage(key){
             if(storage.getItem(key)){
                 storage.removeItem(key);
-                return true;
+                console.log('Removed')
             }else{
                 return false;
             }

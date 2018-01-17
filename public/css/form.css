@@ -54,18 +54,15 @@ main.container{
 }
 
 .form-head + div {
-    padding-top: 45px
+    padding-top: 70px
 }
 .progress_wrapper{
     height: 30px;
-    background: white;
-    padding: 10px 15px;
-    margin-bottom: 15px
-}
-.progress{
-    width: 80%;
-    height: 10px;/* Rectangle 2: */
-    background: #D8D8D8;
+    padding: 10px 15px;    
+    margin-bottom: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 15px;
     border: 2px solid #FFFFFF;
 }
 #progress_inner{

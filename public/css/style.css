@@ -1,6 +1,6 @@
 @font-face{
     font-family: corisandeLight;
-    src: url(corisande_light.ttf);
+    src: url(../corisande_light.ttf);
 }
 body {
     font-family: corisandeLight, Arial, Helvetica, sans-serif;
@@ -50,6 +50,10 @@ main.container {
 
 .main-logo {
     width: 170px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     margin-top: -8px;
 }
 
