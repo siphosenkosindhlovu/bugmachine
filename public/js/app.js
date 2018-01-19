@@ -6,8 +6,7 @@
         'ui.router',
         'ngCookies',
         'ngAnimate',
-        'naif.base64',
-        'ng-appcache'
+        'naif.base64'
     ]);
 
     bugmachine.factory('requestInterceptor', [

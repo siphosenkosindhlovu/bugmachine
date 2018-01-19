@@ -49,48 +49,7 @@
             </div>
         </div>
     </div>
-    <script>
-        applicationCache.addEventListener('checking', function () {
-        })
-        applicationCache.addEventListener('cached', function () {
-            $('.loader-custom').addClass('loaded-success')
-            $('.progress-bar').css('width', '100%')
-            setTimeout(function () {
-                $('#loader').css('display', 'none')
-            }, 2500)
-        })
-        applicationCache.addEventListener('noupdate', function () {
-
-            $('.loader-custom').addClass('loaded-success');
-            $('.progress-bar').css('width', '100%')
-            setTimeout(function () {
-                $('#loader').css('display', 'none')
-            }, 2500)
-        })
-        applicationCache.addEventListener('downloading', function (e) {
-            e.preventDefault();
-            $('#status').text('Downloading')
-        })
-        applicationCache.addEventListener('progress', function (e) {
-            $('#status').text('Downloading');
-
-            var prog = (e.loaded / e.total) * 100;
-            var width = prog + '%'
-            $('.progress-bar').css('width', width)
-            console.log(e)
-        })
-        applicationCache.addEventListener('updateready', function () {
-            $('#status').text('Update Ready, Reloading page')
-            $('.loader-custom').addClass('loaded-success');
-
-            $('.progress-bar').css('width', '100%')
-            setTimeout(function () {
-                location.reload();
-                $('#loader').css('display', 'none')
-            }, 2500)
-        })
-    </script>
-    <div data-ng-app="bugmachine" class="main">
+    <div data-ng-app="bugmachine" class="main" style="display: none">
         <header class="main-nav" ng-controller="NavController as nc">
             <div class="title_bar container">
                 <span style="float:left">
@@ -121,12 +80,56 @@
         </header>
         <div class="main-view" ui-view></div>
     </div>
+
+    <script>
+        applicationCache.addEventListener('checking', function () {
+        })
+        applicationCache.addEventListener('cached', function () {
+            $('.loader-custom').addClass('loaded-success')
+            $('.progress-bar').css('width', '100%')
+            setTimeout(function () {
+                $('#loader').css('display', 'none')
+            }, 2500)
+        })
+        applicationCache.addEventListener('noupdate', function () {
+
+            $('.loader-custom').addClass('loaded-success');
+            $('.progress-bar').css('width', '100%')
+            setTimeout(function () {
+                $('#loader').css('display', 'none')
+                $('.main').css('display', 'block');
+            }, 2500)
+        })
+        applicationCache.addEventListener('downloading', function (e) {
+            e.preventDefault();
+            $('#status').text('Downloading')
+        })
+        applicationCache.addEventListener('progress', function (e) {
+            $('#status').text('Downloading');
+
+            var prog = (e.loaded / e.total) * 100;
+            var width = prog + '%'
+            $('.progress-bar').css('width', width)
+            console.log(e)
+        })
+        applicationCache.addEventListener('error', function (e) {
+            $('#status').text('Error loading application');
+        })
+        applicationCache.addEventListener('updateready', function () {
+            $('#status').text('Update Ready, Reloading page')
+            $('.loader-custom').addClass('loaded-success');
+
+            $('.progress-bar').css('width', '100%')
+            setTimeout(function () {
+                location.reload();
+            }, 2500)
+        })
+    </script>
     <script src="js/app.js"></script>
     <script src="js/services/authService.js"></script>
     <script src="js/services/submitService.js"></script>
     <script src="js/services/localStorageHelper.js"></script>
     <script src="js/directives/angular-base64-upload.js"></script>
-    <script src="js/directives/appcache.js"></script>
     <script src="js/controllers/navController.js"></script>
     <script src="js/controllers/homeController.js"></script>
     <script src="js/controllers/loginController.js"></script>

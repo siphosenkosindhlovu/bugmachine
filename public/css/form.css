@@ -40,7 +40,7 @@ div[data-role=page]{/* Rectangle 3: */
     padding-bottom: 50px;
 }
 main.container{
-    background: transparent !important;;
+    background: transparent !important;
     box-shadow: 0 0 0 transparent;
 }
 .form-head{

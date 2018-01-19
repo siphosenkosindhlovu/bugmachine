@@ -9,7 +9,7 @@ config.db = {
 };
 
 config.db.details = {
-    host: 'localhost',
+    host: process.env.HOST,
     port: 8888,
     dialect: 'mysql'
 };
